@@ -2,6 +2,7 @@ package diodes
 
 import (
 	"log"
+	"math"
 	"sync/atomic"
 	"unsafe"
 )
@@ -33,7 +34,7 @@ func NewManyToOne(size int, alerter Alerter) *ManyToOne {
 	// Start write index at the value before 0
 	// to allow the first write to use AddUint64
 	// and still have a beginning index of 0
-	d.writeIndex = ^d.writeIndex
+	d.writeIndex = math.MaxUint64
 	return d
 }
 
